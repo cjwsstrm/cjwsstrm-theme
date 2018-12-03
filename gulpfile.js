@@ -16,6 +16,7 @@ const
   ftp           = require('vinyl-ftp'),
   env           = require('gulp-env'),
   notify        = require('gulp-notify'),
+  del           = require('del'),
   gutil         = require('gulp-util'),
   // newer         = require('gulp-newer'),
   imagemin      = require('gulp-imagemin'),
@@ -46,6 +47,10 @@ gulp.task('default', (done) => {
   console.log('gulp deploy: deploy changed files to remote SFTP');
   console.log('gulp watch: watch src and auto deploy all changes');
   done();
+});
+
+gulp.task('clean', () => {
+    return del('dist/**/*.*');
 });
 
 gulp.task('init', () => {
