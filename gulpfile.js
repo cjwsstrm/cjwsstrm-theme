@@ -25,7 +25,9 @@ const
   deporder      = require('gulp-deporder'),
   concat        = require('gulp-concat'),
   stripdebug    = require('gulp-strip-debug'),
-  uglify        = require('gulp-uglify')
+  uglify        = require('gulp-uglify'),
+  babel         = require('gulp-babel'),
+  rename        = require('gulp-rename')
 ;
 
 env('.env.json');
@@ -58,10 +60,17 @@ gulp.task('init', () => {
       .pipe(gulp.dest('dist'));
 });
 
+gulp.task("js", function () {
+  return gulp.src('src/js/cjwsstrm-public.js')
+    .pipe(rename('cjwsstrm-public-compiled.js'))
+    .pipe(babel())
+    .pipe(gulp.dest("src/js"));
+});
+
 
 gulp.task('watch', gulp.series('init', () => {
   console.log('Watching src files for changes...');
-  return gulp.watch('src/**/*', gulp.series('deploy'));
+  return gulp.watch('src/**/*', gulp.series('js','deploy'));
 }));
 
 gulp.task('deploy', () => {
