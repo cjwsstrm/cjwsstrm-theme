@@ -1,6 +1,6 @@
-const dataTestTest = [1,2,3,4,5];
+const dataTesting = [1,2,3,4,5];
 
-let testBabel1 = dataTestTest.map((n) => n * 3);
+let testBabel1 = dataTestTesting.map((n) => n * 3);
 
 const data2 = ['1','2','3','4','5'];
 

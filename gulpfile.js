@@ -56,14 +56,19 @@ gulp.task('clean', () => {
 });
 
 gulp.task('init', () => {
-  return gulp.src(['src/**/*.*', '!src/**/scss/**/*'])
+  return gulp.src(['src/**/*.*', '!src/**/scss/**/*', '!src/js/cjwsstrm-public.js'])
     .pipe(gulp.dest('dist'));
 });
 
+// gulp.task('build-php', () => {
+//   return gulp.src('src/**/*.php')
+  
+// })
+
 gulp.task('build-js', () => {
-  return gulp.src(['src/js/*.js', '!src/js/customizer.js'])
-    .pipe(concat('all.js'))
-    .pipe(rename('all.min.js'))
+  return gulp.src('src/js/cjwsstrm-public.js')
+    .pipe(deporder())
+    .pipe(rename('cjwsstrm-public.min.js'))
     .pipe(babel())
     .pipe(uglify())
     .pipe(gulp.dest('src/js'));
@@ -71,7 +76,6 @@ gulp.task('build-js', () => {
 
 gulp.task('build-images', () => {
   return gulp.src('src/images/*.*')
-    // .pipe(changed('src/images/'))
     .pipe(imagemin())
     .pipe(gulp.dest('src/images/'));
 })
@@ -113,11 +117,13 @@ gulp.task('build-css', gulp.series('build-images', () => {
 
 gulp.task('watch', gulp.series('init', () => {
   console.log('Watching src files for changes...');
+  gulp.watch('src/js/cjwsstrm-public.js', gulp.series('build-js'));
+  gulp.watch('src/scss/style.scss', gulp.series('build-css'));
   return gulp.watch('src/**/*', gulp.series('deploy'));
 }));
 
 gulp.task('deploy', () => {
-  let stream = gulp.src('src/**/*.*')
+  let stream = gulp.src(['src/**/*.*', '!src/**/scss/**/*', '!src/js/cjwsstrm-public.js'])
       .pipe(changed('dist'))
       .pipe(gulp.dest('dist'));
 
