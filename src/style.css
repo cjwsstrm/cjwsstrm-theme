@@ -818,13 +818,14 @@ a:hover, a:active {
 
 .site {
 	display: grid;
-	grid-template-areas: ". main-navbar"
+	grid-template-areas: "main-navbar main-navbar"
 											 "main-sidebar-menu main-content"
 											 "main-footer main-footer";
 	grid-template-columns: 1fr 4fr; 
 	grid-template-rows: 50px minmax(400px,1fr) 50px;
 	grid-gap: 50px;
 }
+
 .site-header {
 	grid-area: main-navbar;
 
@@ -892,7 +893,7 @@ a:hover, a:active {
 }
 
 .site {
-	max-width: 1100px;
+	max-width: 1300px;
 	margin: auto;
 }
 
