@@ -119,7 +119,7 @@ gulp.task('watch', gulp.series('init', () => {
   console.log('Watching src files for changes...');
   gulp.watch('src/js/cjwsstrm-public.js', gulp.series('build-js'));
   gulp.watch('src/scss/style.scss', gulp.series('build-css'));
-  return gulp.watch('src/**/*', gulp.series('deploy'));
+  return gulp.watch(['src/**/*.*', '!src/**/scss/**/*', '!src/js/cjwsstrm-public.js'], gulp.series('deploy'));
 }));
 
 gulp.task('deploy', () => {
@@ -156,3 +156,5 @@ gulp.task('deploy', () => {
 
   return stream.pipe(notify("Successfully uploaded file: <%= file.relative %>."));
 });
+
+// Rewrite so that every task deploys on its own, then chain those tasks?
