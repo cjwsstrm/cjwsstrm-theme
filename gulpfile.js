@@ -52,25 +52,68 @@ gulp.task('default', (done) => {
 });
 
 gulp.task('clean', () => {
-    return del('dist/**/*.*');
+    return del('dist');
 });
 
 gulp.task('init', () => {
-  return gulp.src('src/**/*.*')
-      .pipe(gulp.dest('dist'));
+  return gulp.src(['src/**/*.*', '!src/**/scss/**/*'])
+    .pipe(gulp.dest('dist'));
 });
 
-gulp.task("js", function () {
-  return gulp.src('src/js/cjwsstrm-public.js')
-    .pipe(rename('cjwsstrm-public-compiled.js'))
+gulp.task('build-js', () => {
+  return gulp.src(['src/js/*.js', '!src/js/customizer.js'])
+    .pipe(concat('all.js'))
+    .pipe(rename('all.min.js'))
     .pipe(babel())
-    .pipe(gulp.dest("src/js"));
+    .pipe(uglify())
+    .pipe(gulp.dest('src/js'));
 });
+
+gulp.task('build-images', () => {
+  return gulp.src('src/images/*.*')
+    // .pipe(changed('src/images/'))
+    .pipe(imagemin())
+    .pipe(gulp.dest('src/images/'));
+})
+
+const css = {
+  src         : 'src/scss/style.scss',
+  watch       : 'src/scss/**/*',
+  build       : 'src',
+  sassOpts: {
+    outputStyle     : 'nested',
+    imagePath       : 'src/images/',
+    precision       : 3,
+    errLogToConsole : true
+  },
+  processors: [
+    require('postcss-assets')({
+      loadPaths: ['images/'],
+      basePath: 'src',
+      baseUrl: '/wp-content/themes/cjwsstrm-theme/',
+      cachebuster: true
+    }),
+    require('autoprefixer')({
+      grid: true,
+      browsers: ['>1%']
+    }),
+    require('css-mqpacker'),
+    require('cssnano')
+  ]
+};
+
+gulp.task('build-css', gulp.series('build-images', () => {
+  return gulp.src(css.src)
+    .pipe(sass(css.sassOpts))
+    .pipe(postcss(css.processors))
+    .pipe(rename('style.min.css'))
+    .pipe(gulp.dest(css.build))
+}));
 
 
 gulp.task('watch', gulp.series('init', () => {
   console.log('Watching src files for changes...');
-  return gulp.watch('src/**/*', gulp.series('js','deploy'));
+  return gulp.watch('src/**/*', gulp.series('deploy'));
 }));
 
 gulp.task('deploy', () => {

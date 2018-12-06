@@ -1,7 +1,7 @@
-let data = [1,2,3,4,5];
+const dataTestTest = [1,2,3,4,5];
 
-var testBabel = data.map((n) => n * 3);
+let testBabel1 = dataTestTest.map((n) => n * 3);
 
-var data2 = ['1','2','3','4','5'];
+const data2 = ['1','2','3','4','5'];
 
-var testBabel2 = data.filter((n) => parseInt(n) * 10);
+let testBabel22 = data.filter((n) => parseInt(n) * 10);
