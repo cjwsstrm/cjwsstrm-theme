@@ -651,12 +651,14 @@ a:hover, a:active {
 }
 
 .main-navigation ul ul {
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-	float: left;
-	position: absolute;
-	top: 100%;
-	left: -999em;
+	// box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+	// float: left;
+	// position: absolute;
+	// top: 100%;
+	// left: -999em;
 	z-index: 99999;
+	display: none;
+
 }
 
 .main-navigation ul ul ul {
@@ -666,7 +668,8 @@ a:hover, a:active {
 
 .main-navigation ul ul li:hover > ul,
 .main-navigation ul ul li.focus > ul {
-	left: 100%;
+	// left: 100%;
+	display: block;
 }
 
 .main-navigation ul ul a {
@@ -675,11 +678,12 @@ a:hover, a:active {
 
 .main-navigation ul li:hover > ul,
 .main-navigation ul li.focus > ul {
-	left: auto;
+	// left: auto;
+	display: block;
 }
 
 .main-navigation li {
-	float: left;
+	// float: left;
 	position: relative;
 	margin: 0 10px;
 	padding: 20px;
@@ -734,15 +738,15 @@ a:hover, a:active {
 	padding: 0;
 }
 
-.widget-area {
+.site-header {
 	border-right-style: solid;
 }
 
-#menu-sidebar-menu li {
+#primary-menu li {
 	padding: 10px 20px;
 }
 
-#menu-sidebar-menu li a {
+#primary-menu li a {
 	/* font-family: monospace; */
 	font-size: 2em;
 	text-decoration: none;
@@ -816,30 +820,32 @@ a:hover, a:active {
 	margin-right: auto;
 }
 
-.site {
-	display: grid;
-	grid-template-areas: "main-navbar main-navbar"
-						 "main-sidebar-menu main-content"
-						 "main-footer main-footer";
-	grid-template-columns: 1fr 4fr; 
-	grid-template-rows: 50px minmax(400px,1fr) 50px;
-	grid-gap: 50px;
+@media (min-width: 37.5em) {
+	.site {
+		display: grid;
+		grid-template-areas: "main-navbar main-navbar"
+							 "main-sidebar-menu main-content"
+							 "main-footer main-footer";
+		grid-template-columns: 300px 4fr; 
+		grid-template-rows: 50px minmax(400px,1fr) 50px;
+		grid-gap: 50px;
+	}
+	
+	.site-header {
+		grid-area: main-sidebar-menu;
+	}
+	// .widget-area {
+	// 	grid-area: main-sidebar-menu;
+	// }
+	.site-content {
+		grid-area: main-content;
+	}
+	.site-footer {
+		grid-area: main-footer;
+		justify-self: center;
+	}
 }
 
-.site-header {
-	grid-area: main-navbar;
-
-}
-.widget-area {
-	grid-area: main-sidebar-menu;
-}
-.site-content {
-	grid-area: main-content;
-}
-.site-footer {
-	grid-area: main-footer;
-	justify-self: center;
-}
 
 /*--------------------------------------------------------------
 # Clearings
@@ -909,7 +915,7 @@ a:hover, a:active {
 .page-content,
 .entry-content,
 .entry-summary {
-	margin: 1.5em 0 0;
+	// margin: 1.5em 0 0;
 }
 
 .page-links {
