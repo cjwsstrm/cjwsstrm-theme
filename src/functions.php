@@ -122,11 +122,11 @@ add_action( 'widgets_init', 'cjwsstrm_widgets_init' );
 function cjwsstrm_scripts() {
 	wp_enqueue_style( 'cjwsstrm-style', get_stylesheet_directory_uri() . '/style.min.css', array(), false );
 
-	wp_enqueue_script( 'cjwsstrm-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	wp_enqueue_script( 'cjwsstrm-navigation', get_template_directory_uri() . '/js/navigation.js', array(), true );
 
-	wp_enqueue_script( 'cjwsstrm-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+	wp_enqueue_script( 'cjwsstrm-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), true );
 
-	wp_enqueue_script( 'cjwsstrm-public', get_template_directory_uri() . '/js/cjwsstrm-public.min.js', array(), '20151215', true );
+	wp_enqueue_script( 'cjwsstrm-public', get_template_directory_uri() . '/js/cjwsstrm-public.min.js', array(), true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -161,3 +161,59 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+add_action( 'wp_head', 'bust_cache', 7 );
+
+// Questions: 
+// Why "$handle => $script"? there is no script key/value in either $wp_styles or $wp_scripts
+function bust_cache() {
+	global $wp_scripts;
+	global $wp_styles;
+	// var_dump($wp_styles);
+	// CSS busting
+	if ( !isset( $wp_styles->__cache_busted ) && is_object( $wp_styles ) ) {
+		foreach ( $wp_styles->registered as $handle => $script ) {
+			$modification_time = modification_time( $script->src );
+			if ( $modification_time ) {
+				if ( !empty ( $script->ver ) ) {
+					$version = $script->ver . '-' . $modification_time;
+				} else {
+					$version = $modification_time;
+				}
+				$wp_styles->registered[$handle]->ver = $version;
+			}
+		}
+
+		$wp_styles->__cache_busted = true;
+	}
+	// JS busting
+	if ( !isset( $wp_scripts->__cache_busted ) && is_object( $wp_scripts ) ) {
+		foreach ( $wp_scripts->registered as $handle => $script ) {
+			$modification_time = modification_time( $script->src );
+			if ( $modification_time ) {
+				if ( !empty ( $script->ver ) ) {
+					$version = $script->ver . '-' . $modification_time;
+				} else {
+					$version = $modification_time;
+				}
+				$wp_scripts->registered[$handle]->ver = $version;
+			}
+		}
+
+		$wp_scripts->__cache_busted = true;
+	}
+}
+
+// Why not use straight timetamp string instead of filemtime?
+function modification_time( $src ) {
+	if ( strpos( $src, content_url() ) !== false ) {
+		$src = WP_CONTENT_DIR . str_replace( content_url(), '', $src );
+	}
+
+	$file = realpath( $src );
+
+	if ( file_exists( $file ) ) {
+		return filemtime( $file );
+	}
+
+	return false;
+}	
