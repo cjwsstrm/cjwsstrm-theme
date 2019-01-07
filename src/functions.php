@@ -122,11 +122,12 @@ add_action( 'widgets_init', 'cjwsstrm_widgets_init' );
 function cjwsstrm_scripts() {
 	wp_enqueue_style( 'cjwsstrm-style', get_stylesheet_directory_uri() . '/style.min.css', array(), false );
 
-	wp_enqueue_script( 'cjwsstrm-navigation', get_template_directory_uri() . '/js/navigation.js', array(), true );
+	wp_enqueue_script( 'cjwsstrm-navigation', get_template_directory_uri() . '/js/navigation.js', array(), true, true );
+	wp_script_add_data( 'cjwsstrm-navigation', 'async' , true );
 
-	wp_enqueue_script( 'cjwsstrm-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), true );
+	wp_enqueue_script( 'cjwsstrm-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), true, true );
 
-	wp_enqueue_script( 'cjwsstrm-public', get_template_directory_uri() . '/js/cjwsstrm-public.min.js', array(), true );
+	wp_enqueue_script( 'cjwsstrm-public', get_template_directory_uri() . '/js/cjwsstrm-public.min.js', array(), true, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -203,7 +204,7 @@ function bust_cache() {
 	}
 }
 
-// Why not use straight timetamp string instead of filemtime?
+// Why not use straight timestamp string instead of filemtime?
 function modification_time( $src ) {
 	if ( strpos( $src, content_url() ) !== false ) {
 		$src = WP_CONTENT_DIR . str_replace( content_url(), '', $src );
