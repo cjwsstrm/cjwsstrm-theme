@@ -36,6 +36,7 @@ get_sidebar('sidebar-1');
 
 			</main><!-- #main -->
 		</div><!-- #primary -->
+	</div><!-- #content -->
 
 <?php
 // get_sidebar();

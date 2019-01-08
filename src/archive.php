@@ -46,8 +46,8 @@ get_header();
 		?>
 
 		</main><!-- #main -->
+		<?php get_footer(); ?>
 	</div><!-- #primary -->
 
 <?php
-get_sidebar();
-get_footer();
+// get_sidebar();
