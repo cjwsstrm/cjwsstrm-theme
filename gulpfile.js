@@ -106,13 +106,13 @@ const css = {
   ]
 };
 
-gulp.task('build-css', gulp.series('build-images', () => {
+gulp.task('build-css', () => {
   return gulp.src(css.src)
     .pipe(sass(css.sassOpts))
     .pipe(postcss(css.processors))
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest(css.build))
-}));
+});
 
 
 gulp.task('watch', gulp.series('init', () => {
