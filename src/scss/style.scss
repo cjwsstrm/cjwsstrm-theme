@@ -389,6 +389,12 @@ template {
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
+@font-face {
+	font-family: 'Inconsolata';
+	src: local('Inconsolata'),
+		 url('fonts/Inconsolata-Regular.ttf');
+}
+
 body,
 button,
 input,

@@ -169,14 +169,13 @@ add_action( 'wp_head', 'bust_cache', 7 );
 function bust_cache() {
 	global $wp_scripts;
 	global $wp_styles;
-	// var_dump($wp_styles);
 	// CSS busting
 	if ( !isset( $wp_styles->__cache_busted ) && is_object( $wp_styles ) ) {
-		foreach ( $wp_styles->registered as $handle => $script ) {
-			$modification_time = modification_time( $script->src );
+		foreach ( $wp_styles->registered as $handle => $style ) {
+			$modification_time = modification_time( $style->src );
 			if ( $modification_time ) {
-				if ( !empty ( $script->ver ) ) {
-					$version = $script->ver . '-' . $modification_time;
+				if ( !empty ( $style->ver ) ) {
+					$version = $style->ver . '-' . $modification_time;
 				} else {
 					$version = $modification_time;
 				}

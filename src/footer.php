@@ -17,7 +17,6 @@
 				/* translators: 1: Theme name, 2: Theme author. */
 				printf( esc_html__( 'Theme: %1$s by %2$s.', 'cjwsstrm' ), 'cjwsstrm', '<a href="https://github.com/cjwsstrm/cjwsstrm-theme">CJ Wesstrom</a>' );
 				?>
-			</a>
 			<span class="sep"> | </span>
 				<?php
 				printf( 'Based on <a href="http://underscores.me/">Underscores.me</a>' );
