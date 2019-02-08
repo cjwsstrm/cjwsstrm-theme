@@ -13,7 +13,8 @@ window.addEventListener('load', function() {
   function printDetails(e) {
     e.preventDefault();
     console.log(e);
-    console.log(this);
+    console.log(mainMenu[i]);
+    console.log(mainMenu.childNodes[i]);
   }
 
   const centerIndex = (arr, number) => {
