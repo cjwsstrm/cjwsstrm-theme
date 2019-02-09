@@ -3,18 +3,20 @@
 window.addEventListener('load', function() {
   console.log('All assets are loaded')
   let mainMenu = document.querySelector('#primary-menu');
-  // console.log(mainMenu);
+  let mainMenuArray = Array.from(mainMenu.children);
+  // console.log(mainMenuArray);
   let menuItems = mainMenu.querySelectorAll('li');
   // console.log(menuItems);
   for (var i = 0; i < menuItems.length; i++) {
+    // menuItems[i].index = i;
     menuItems[i].addEventListener('click', printDetails);
   }
   
   function printDetails(e) {
     e.preventDefault();
-    console.log(e);
-    console.log(mainMenu[i]);
-    console.log(mainMenu.childNodes[i]);
+    // console.log(e.target.parentNode);
+    console.log(mainMenuArray.indexOf(e.target.parentNode));
+    // console.log(mainMenu.children);
   }
 
   const centerIndex = (arr, number) => {
