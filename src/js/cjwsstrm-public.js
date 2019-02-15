@@ -14,10 +14,16 @@ window.addEventListener('load', function() {
   
   function newCenter(e) {
     e.preventDefault();
+    mainMenu = document.querySelector('#primary-menu');
+    mainMenuArray = Array.from(mainMenu.children);
+  // console.log(mainMenuArray);
+    menuItems = mainMenu.querySelectorAll('li');
+  // console.log(menuItems);
     let targetIndex = mainMenuArray.indexOf(e.target.parentNode); 
     // console.log(mainMenuArray.indexOf(e.target.parentNode));
     // mainMenu.insertBefore(this, mainMenu.childNodes[0]);
     if (targetIndex < 0) {
+      console.log(targetIndex);
       console.log(`The number you provided is not part of the array.`);
       return;
     }
@@ -27,41 +33,32 @@ window.addEventListener('load', function() {
     } else {
       newPosition = mainMenuArray.length / 2;
     }
-    console.log(targetIndex);
+    console.log(`index clicked: ${targetIndex}`);
     console.log(mainMenuArray[newPosition]);
-    console.log(mainMenuArray.indexOf(mainMenuArray[newPosition]));
-    console.log(mainMenuArray.length)
+    console.log(`move clicked item to this position: ${mainMenuArray.indexOf(mainMenuArray[newPosition])}`);
+    console.log(`length of menu array: ${mainMenuArray.length}`);
     console.log(`mainMenuArray before: ${mainMenuArray}`);
     let steps = Math.abs(targetIndex - mainMenuArray.indexOf(mainMenuArray[newPosition]));
-    let appendLast = [];
     if (targetIndex > newPosition) {
-    for (i = 0; i < mainMenuArray.length; i++) {
-      if ((i - steps) < 0 ) {
-        console.log( i - steps);
-        // console.log(mainMenuArray[i]);
-        appendLast.push(mainMenuArray[i]);
-      }
-    }
-    for (i = 0; i < appendLast.length; i++) {
-      mainMenuArray.splice(0, 1); // Remove the first items in the array
-      console.log(appendLast[i]);
-      mainMenuArray.push(appendLast[i]); // Add them to the back of the array
+      for (i = 0; i < mainMenuArray.length; i++) {
+        if ((i - steps) < 0 ) {
+          console.log(`i - steps: ${i - steps}`);
+          console.log(i);
+          mainMenu.appendChild(mainMenuArray[i]);
+        }
       }
     }
     if (targetIndex < newPosition) {
       for (i = 0; i < mainMenuArray.length; i++) {
         if ((i + steps) > mainMenuArray.length - 1 ) {
-          // console.log(appendLast)
-          appendLast.push(mainMenuArray[i]);
+          console.log(`steps: ${steps}`);
+          console.log(`i: ${i}`);
+          console.log(`i + steps: ${i + steps}`);
+          mainMenu.insertBefore(mainMenuArray[i], mainMenuArray[0]);
         } 
-      }
-      for (i = 0; i < appendLast.length; i++) {
-        mainMenuArray.splice((mainMenuArray.length - 1), 1); // Remove the last items in the array
-        mainMenuArray.push(appendLast[i]); // Add them to the front of the array
       }
     }
     console.log(`steps: ${steps}`);
-    console.log(`appendLast: ${appendLast}`);
     console.log(`arr after: ${mainMenuArray}`);
   };
 
