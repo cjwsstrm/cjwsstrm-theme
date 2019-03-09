@@ -13,7 +13,7 @@ window.addEventListener('load', function() {
   }
   
   function newCenter(e) {
-    e.preventDefault();
+    // e.preventDefault();
     let targetIndex = mainMenuArray.indexOf(e.target.parentNode); 
     // console.log(mainMenuArray.indexOf(e.target.parentNode));
     // mainMenu.insertBefore(this, mainMenu.childNodes[0]);
