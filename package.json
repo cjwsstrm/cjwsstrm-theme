@@ -1,7 +1,7 @@
 {
   "name": "cjwsstrm-theme",
   "version": "1.0.0",
-  "description": "Theme for personal website, built on underscores base theme",
+  "description": "Theme for personal website, built on underscores base theme. Packages are solely used to improve development flow through gulp scripts",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
