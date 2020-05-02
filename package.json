@@ -1,7 +1,7 @@
 {
   "name": "cjwsstrm-theme",
   "version": "1.0.0",
-  "description": "Theme for personal website, built on underscores base theme",
+  "description": "Theme for personal website, built on underscores base theme. Packages are solely used to improve development flow through gulp scripts",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,17 +14,17 @@
   "author": "CJ Wesstrom",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
-    "autoprefixer": "^9.3.1",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "autoprefixer": "^9.5.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "browser-sync": "^2.26.3",
+    "browser-sync": "^2.26.5",
     "css-mqpacker": "^7.0.0",
-    "cssnano": "^4.1.7",
+    "cssnano": "^4.1.10",
     "del": "^3.0.0",
-    "gulp": "^4.0.0",
-    "gulp-babel": "^8.0.0-beta.2",
+    "gulp": "^4.0.1",
+    "gulp-babel": "^8.0.0",
     "gulp-changed": "^3.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-deporder": "^1.1.0",
@@ -37,10 +37,11 @@
     "gulp-sass": "^4.0.2",
     "gulp-sftp": "^0.1.5",
     "gulp-strip-debug": "^3.0.0",
-    "gulp-uglify": "^3.0.1",
+    "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
     "postcss-assets": "^5.0.0",
-    "vinyl-ftp": "^0.6.1"
+    "vinyl-ftp": "^0.6.1",
+    "tar": ">=4.4.2"
   },
   "dependencies": {}
 }
