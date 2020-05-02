@@ -1,7 +1,6 @@
 
 // Set current menu item to center position in list
 window.addEventListener('load', function() {
-<<<<<<< HEAD
   console.log('All assets are loaded')
   let mainMenu = document.querySelector('#primary-menu');
   let mainMenuArray = Array.from(mainMenu.children);
@@ -110,7 +109,3 @@ window.addEventListener('load', function() {
   //   console.log(`appendLast: ${appendLast}`);
   //   console.log(`arr after: ${arr}`);
   // }
-=======
-  console.log('Welcome to cjwsstrm.com');
-})
->>>>>>> f36abc36894d718b22045b37795816dcae72c1e3
